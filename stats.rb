@@ -56,10 +56,19 @@ def restore(statname)
   end
 end
 
-statname = ARGF.argv[0]
-statval = ARGF.argv[1]
+
+if ARGF.argv.size < 2
+  puts "Usage: ./stats.rb <name> <val> [--print]"
+  exit 1
+end
+statname = ARGV[0]
+statval = ARGV[1]
+
 
 restore(statname)
 add(statval)
 save(statname)
-stats()
+
+if ARGV.size == 3 && ARGV[2] == "--print"
+  stats()
+end
