@@ -9,13 +9,23 @@ $data =  {"totalseen" => 0, "samples" => []}
 # Get the stats for a given name
 def stats()
   percentiles = [0.75, 0.90, 0.99]
+  cnt = min = max = sum = avg = 0
   vals = $data["samples"].sort { |x,y| y <=> x }
-#  print "vals: ", vals, "\n"
-  print "cnt: ", vals.size, "\n"
-  print "min: ", vals[vals.size-1], "\n"
-  print "max: ", vals[0], "\n"
 
-  sum = 0
+  if vals.size > 0
+    cnt = vals.size
+    min = vals[vals.size-1]
+    max = vals[0]
+  end
+
+  puts "cnt: #{cnt}"
+  puts "min: #{min}"
+  puts "max: #{max}"
+
+  if vals.size == 0
+    return
+  end
+  
   vals.each do |v|
     sum += v
   end
