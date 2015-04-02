@@ -58,12 +58,18 @@ end
 
 
 if ARGF.argv.size < 2
-  puts "Usage: ./stats.rb <name> <val> [--print]"
+  puts "Usage: ./stats.rb <name> [val] [--print]"
   exit 1
 end
 statname = ARGV[0]
 statval = ARGV[1]
 
+
+if statval == "--print"
+  restore(statname)
+  stats()
+  exit 0
+end
 
 restore(statname)
 add(statval)
